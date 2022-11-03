@@ -1,0 +1,132 @@
+import java.util.Scanner;
+public class Calculater {
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            System.out.print("Введите итерацию: ");
+            String num = in.nextLine();
+            try {
+                if (num.contains("1")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("2")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("3")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("4")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("5")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("6")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("7")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("8")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("9")){System.out.println("Ваш ответ: " + spleat(num));}
+                else if (num.contains("0")){System.out.println("Ваш ответ: " + spleat(num));}
+                else{
+                    System.out.println("Ваш ответ: " + RomeOperation(num));}
+            }
+            catch (NumberFormatException e){
+                System.out.println("Fucked");
+            }
+        }
+
+        private static String RomeOperation(String num) {
+            String[] numbers = new String[2];
+            int result = 0;
+            int firstNumber = 0;
+            int secondNumber = 0;
+            String operation = "";
+            String[] rome = {
+                    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                    "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+                    "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XVII", "XVIII", "XXIX", "XXX",
+                    "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+                    "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
+                    "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+                    "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+                    "LXXI", "LXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVII", "LXXIX", "LXXX",
+                    "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                    "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
+            };
+            if (num.contains("+")) {
+                numbers = num.split("[+]");
+                operation = "+";
+            } else if (num.contains("-")) {
+                numbers = num.split("[-]");
+                operation = "-";
+            } else if (num.contains("*")) {
+                numbers = num.split("[*]");
+                operation = "*";
+            } else if (num.contains("/")) {
+                numbers = num.split("[/]");
+                operation = "/";
+            }
+            for (int i = 0; i < rome.length; i++) {
+                if (rome[i].equals(numbers[0])) {
+                    firstNumber = i + 1;
+                }
+                if (rome[i].equals(numbers[1])) {
+                    secondNumber = i + 1;
+                }
+            }
+            if (secondNumber != 0 && firstNumber != 0 && secondNumber <= 10 && firstNumber <= 10) {
+
+                switch (operation) {
+                    case "+":
+                        result = firstNumber + secondNumber;
+                        break;
+                    case "-":
+                        result = firstNumber - secondNumber;
+                        break;
+                    case "*":
+                        result = firstNumber * secondNumber;
+                        break;
+                    case "/":
+                        result = firstNumber / secondNumber;
+                        break;
+                }
+
+                try {
+                    return rome[result - 1];
+                }
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println("Fuckedd");
+                }
+            }
+            else {
+                System.out.println(RomeOperation(num));
+            }
+            return "";
+        }
+        public static int spleat(String num) {
+            int a,i,sum=0;
+            String[] words=new String[2];
+            if(num.contains("-")){
+                words=num.split("[-]");
+                i = Integer.parseInt(words[0]);a= Integer.parseInt(words[1]);
+                if(a>10 | i>10) {
+                    System.out.println("нельзя");
+                }
+                else {sum= i-a;}
+            }
+            else if (num.contains("+")) {
+                words=num.split("[+]");
+                i= Integer.parseInt(words[0]); a= Integer.parseInt(words[1]);
+                if(a>10 | i>10) {
+                    System.out.println("нельзя");
+                }
+                else {sum= i+a;}
+            }
+            else if(num.contains("*")){
+                words=num.split("[*]");
+                i=Integer.parseInt(words[0]); a=Integer.parseInt(words[1]);
+                if(a>10 | i>10) {
+                    System.out.println("нельзя");
+                }
+                else {sum= i*a;}
+            }
+            else if (num.contains("/")) {
+                words=num.split("[/]");
+                i=Integer.parseInt(words[0]); a=Integer.parseInt(words[1]);
+                if(a>10 | i>10) {
+                    System.out.println("нельзя");
+                }
+                else
+                {sum= (int)(i/a);}
+            }
+            return sum;
+        }
+    }
